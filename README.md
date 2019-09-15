@@ -11,13 +11,14 @@ cargo install diesel_cli --no-default-features --features postgres
 ```
 
 Ensure that you have a postgreSQL server running and from the project root directory run.
-**_(Replace `[databaseUrl]` with your database url)_**
 
 ```bash
 echo "DATABASE_URL=[databaseUrl]" > .env
 diesel migration run
 cargo run
 ```
+
+**_N.b. - Replace `[databaseUrl]` with your database url_**
 
 ### Open Graphql client
 
