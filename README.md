@@ -22,9 +22,7 @@ cargo run
 
 ### Open Graphql client
 
-```
-http://localhost:8080/graphiql
-```
+[http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 
 ### Create a User
 
