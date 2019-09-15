@@ -1,0 +1,19 @@
+[package]
+name = "actix-web-juniper-diesel"
+version = "0.1.0"
+authors = ["Frank Panetta"]
+edition = "2018"
+
+[dependencies]
+env_logger = "0.6.2"
+actix = "0.8.3"
+actix-web = "1.0.7"
+actix-cors = "0.1.0"
+futures = "0.1"
+uuid = { version = "0.7.4", features = ["serde", "v4"] }
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
+diesel = { version = "1.4.2", features = ["postgres", "r2d2"] }
+dotenv = "0.14.1"
+juniper = "0.13.1"
