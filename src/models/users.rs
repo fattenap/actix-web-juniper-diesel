@@ -1,16 +1,28 @@
 use crate::schema::users;
 
-#[derive(juniper::GraphQLObject, Debug, Serialize, Queryable)]
-#[graphql(description = "A User")]
+#[derive(Debug, Serialize, Queryable)]
 pub struct User {
     pub id: String,
     pub name: String,
 }
 
 #[derive(juniper::GraphQLInputObject, Debug, Insertable)]
-#[graphql(description = "A new User")]
+#[graphql(description = "A New User")]
 #[table_name = "users"]
 pub struct NewUser {
     pub id: String,
     pub name: String,
+}
+
+#[juniper::object]
+/// Information about a User
+impl User {
+    /// user id
+    fn id(&self) -> &str {
+        &self.id
+    }
+    /// user name
+    fn name(&self) -> &str {
+        &self.name
+    }
 }
