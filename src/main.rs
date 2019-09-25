@@ -7,9 +7,10 @@ use std::sync::Arc;
 extern crate serde_derive;
 #[macro_use]
 extern crate diesel;
-
+#[macro_use]
+extern crate log;
 use actix_cors::Cors;
-use actix_web::{middleware, web, App, Error, HttpResponse, HttpServer};
+use actix_web::{http::header, middleware, web, App, Error, HttpResponse, HttpServer};
 
 use dotenv::dotenv;
 use futures::future::Future;
@@ -58,7 +59,6 @@ fn main() -> io::Result<()> {
     let pool = establish_connection();
     let schema_context = Context { db: pool.clone() };
     let schema = std::sync::Arc::new(create_schema());
-
     HttpServer::new(move || {
         App::new()
             .data(schema.clone())
@@ -66,10 +66,9 @@ fn main() -> io::Result<()> {
             .wrap(middleware::Logger::default())
             .wrap(
                 Cors::new()
-                    .allowed_origin("http://localhost:8080")
+                    .allowed_origin("http://localhost:8000")
                     .allowed_methods(vec!["POST"])
-                    // .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
-                    // .allowed_header(header::CONTENT_TYPE)
+                    .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT,header::CONTENT_TYPE])
                     .supports_credentials()
                     .max_age(3600),
             )
@@ -80,6 +79,6 @@ fn main() -> io::Result<()> {
     .unwrap()
     .start();
 
-    println!("Started http server: 127.0.0.1:8080");
+    info!("Started http server: 127.0.0.1:8080");
     sys.run()
 }
