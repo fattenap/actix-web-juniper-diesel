@@ -11,6 +11,7 @@ extern crate diesel;
 extern crate log;
 use actix_cors::Cors;
 use actix_web::{http::header, middleware, web, App, Error, HttpResponse, HttpServer};
+use actix_files as fs;
 
 use dotenv::dotenv;
 use futures::future::Future;
@@ -78,6 +79,10 @@ fn main() -> io::Result<()> {
             )
             .service(web::resource("/graphql").route(web::post().to_async(graphql)))
             .service(web::resource("/graphiql").route(web::get().to(graphiql)))
+            .service(
+                // static files
+                fs::Files::new("/", "./dist/").index_file("index.html"),
+            )
     })
     .bind("127.0.0.1:8080")
     .unwrap()
