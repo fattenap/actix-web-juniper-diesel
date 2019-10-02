@@ -66,9 +66,13 @@ fn main() -> io::Result<()> {
             .wrap(middleware::Logger::default())
             .wrap(
                 Cors::new()
-                    .allowed_origin("http://localhost:8000")
+                    .allowed_origin("http://localhost:8080")
                     .allowed_methods(vec!["POST"])
-                    .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT,header::CONTENT_TYPE])
+                    .allowed_headers(vec![
+                        header::AUTHORIZATION,
+                        header::ACCEPT,
+                        header::CONTENT_TYPE,
+                    ])
                     .supports_credentials()
                     .max_age(3600),
             )
