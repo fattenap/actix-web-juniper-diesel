@@ -4,7 +4,7 @@ Example using Rust Actix-web with juniper and diesel, connecting to postgreSQL (
 
 ## Running the example
 
-If you have already, install diesel_cli.
+If you haven't already, install diesel_cli.
 
 ```bash
 cargo install diesel_cli --no-default-features --features postgres
